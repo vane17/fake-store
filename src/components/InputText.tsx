@@ -19,6 +19,7 @@ export interface Props {
   type?: "text" | "number";
   value?: string;
   maxWidth?: string;
+  inputType?: "input" | "textarea";
 }
 
 export const InputText = ({
@@ -36,6 +37,7 @@ export const InputText = ({
   type = "text",
   value,
   maxWidth,
+  inputType = "input",
 }: Props) => {
   return (
     <div className={`w-full flex flex-col gap-2 ${maxWidth}`}>
@@ -50,18 +52,32 @@ export const InputText = ({
       )}
 
       <div className="relative w-full">
-        <input
-          name={name}
-          value={value}
-          onChange={onChange}
-          onBlur={onBlur}
-          disabled={isDisabled}
-          placeholder={placeholder}
-          type={type === "text" ? "text" : "number"}
-          className={`outline-none w-full  h-8 rounded-xl  border border-customBlue-500 text-xs px-5 ${
-            prefixIcon ? "pl-12" : ""
-          } ${isDisabled ? "border-customBlue-100" : "border-customBlue-500"}`}
-        />
+        {inputType === "textarea" ? (
+          <textarea
+            name={name}
+            value={value}
+            onChange={onChange}
+            onBlur={onBlur}
+            disabled={isDisabled}
+            placeholder={placeholder}
+            className={`outline-none w-full min-h-20 rounded-xl  border border-customBlue-500 text-xs px-5`}
+          />
+        ) : (
+          <input
+            name={name}
+            value={value}
+            onChange={onChange}
+            onBlur={onBlur}
+            disabled={isDisabled}
+            placeholder={placeholder}
+            type={type}
+            className={`outline-none w-full  h-8 rounded-xl  border border-customBlue-500 text-xs px-5 ${
+              prefixIcon ? "pl-12" : ""
+            } ${
+              isDisabled ? "border-customBlue-100" : "border-customBlue-500"
+            }`}
+          />
+        )}
 
         {prefixIcon && (
           <div

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useContext } from "react";
+import { useEffect, useContext, useState } from "react";
 
 import Image from "next/image";
 
@@ -9,7 +9,7 @@ import { ProductsContext } from "@/store/context/products.context";
 
 // ---- components
 import { Button, InputText } from "@/components/Index";
-import { TableProducts } from "../components/TableProducts";
+import { TableProducts, NewProductModal } from "../components";
 
 // ---- interfaces
 import { ProductEntity } from "../interfaces/product";
@@ -25,6 +25,7 @@ interface Props {
 
 export const ProductsGrid = ({ products }: Props) => {
   const { dispatch } = useContext(ProductsContext);
+  const [addProduct, setProduct] = useState(false)
 
   useEffect(() => {
     dispatch({
@@ -37,7 +38,7 @@ export const ProductsGrid = ({ products }: Props) => {
   return (
     <section className="flex flex-col gap-9 w-full">
       <div className="flex items-center justify-between">
-        <Button customClassButton="h-10 px-6">
+        <Button customClassButton="h-10 px-6" onClick={()=>setProduct(true)}>
           <div className="flex items-center gap-2">
             <Image
               src={iconPlusFolder}
@@ -58,6 +59,9 @@ export const ProductsGrid = ({ products }: Props) => {
         suffix={<IconSearch size={16} className="text-customBlue-500" />}
       ></InputText>
       <TableProducts />
+      {
+        addProduct && <NewProductModal onClose={()=>setProduct(false)}/>
+      }
     </section>
   );
 };

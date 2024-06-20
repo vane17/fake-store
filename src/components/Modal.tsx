@@ -29,6 +29,7 @@ const STYLES_MODAL: Styles = {
     display: "flex",
     justifyContent: "center",
     position: "absolute",
+    overflow: "none"
   },
   overlay: {
     zIndex: 10000000,
