@@ -9,7 +9,7 @@ export interface Props {
   isSearch?: boolean;
   isSuccess?: boolean;
   isValid?: boolean;
-  label: string;
+  label?: string;
   name?: string;
   onBlur?: FocusEventHandler;
   onChange?: ChangeEventHandler;
@@ -18,6 +18,7 @@ export interface Props {
   suffix?: string | ReactNode;
   type?: "text" | "number";
   value?: string;
+  maxWidth?: string;
 }
 
 export const InputText = ({
@@ -34,16 +35,20 @@ export const InputText = ({
   suffix,
   type = "text",
   value,
+  maxWidth,
 }: Props) => {
   return (
-    <div className={`w-full flex flex-col gap-2`}>
-      <div
-        className={`text-xs font-bold ${
-          isDisabled ? "text-customBlue-100" : "text-customBlue-500"
-        } flex items-center`}
-      >
-        {label}
-      </div>
+    <div className={`w-full flex flex-col gap-2 ${maxWidth}`}>
+      {label && (
+        <div
+          className={`text-xs font-bold ${
+            isDisabled ? "text-customBlue-100" : "text-customBlue-500"
+          } flex items-center`}
+        >
+          {label}
+        </div>
+      )}
+
       <div className="relative w-full">
         <input
           name={name}
