@@ -46,9 +46,9 @@ export const Table = <T extends { [key: string]: any }>({
             </tr>
           </thead>
           <tbody>
-            {data?.map((item) => {
+            {data?.map((item, idx) => {
               return (
-                <tr>
+                <tr key={idx}>
                   {columns.map((column, colIndex) => (
                     <td key={colIndex} className="px-6 pt-4">
                       {typeof children === "function"
