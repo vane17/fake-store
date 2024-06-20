@@ -1,5 +1,6 @@
 "use client";
 import { ProductsProvider } from "@/store/context/products.provider";
+import { ToastContainer } from "react-toastify";
 
 interface Props {
   children: JSX.Element;
@@ -13,5 +14,10 @@ export const Providers = ({ children }: Props) => {
   }, [])
    */
 
-  return <ProductsProvider>{children}</ProductsProvider>;
+  return (
+    <ProductsProvider>
+      <ToastContainer />
+      {children}
+    </ProductsProvider>
+  );
 };

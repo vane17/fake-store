@@ -34,9 +34,7 @@ export const Button = ({
     "bg-customRed-900  border-customRed-900  focus:ring-customRed-600":
       type === "danger",
     "border-customViolet-900 focus:ring-0": type === "back",
-    "bg-customBlue-300 cursor-not-allowed ": isLoading || isDisabled,
-    "pr-10": isLoading,
-    "cursor-not-allowed bg-customViolet-300": isLoading || isDisabled,
+    "cursor-not-allowed": isLoading || isDisabled,
   });
 
   return (
