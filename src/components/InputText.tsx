@@ -60,7 +60,7 @@ export const InputText = ({
             onBlur={onBlur}
             disabled={isDisabled}
             placeholder={placeholder}
-            className={`outline-none w-full min-h-20 rounded-xl  border border-customBlue-500 text-xs px-5`}
+            className={`outline-none w-full min-h-20 rounded-xl text-[#494949]  border border-customBlue-500 text-xs px-5`}
           />
         ) : (
           <input
@@ -71,8 +71,8 @@ export const InputText = ({
             disabled={isDisabled}
             placeholder={placeholder}
             type={type}
-            className={`outline-none w-full  h-8 rounded-xl  border border-customBlue-500 text-xs px-5 ${
-              prefixIcon ? "pl-12" : ""
+            className={`outline-none w-full  h-8 rounded-xl text-[#494949] border border-customBlue-500 text-xs px-5 ${
+              prefixIcon ? "pl-10" : ""
             } ${
               isDisabled ? "border-customBlue-100" : "border-customBlue-500"
             }`}
@@ -109,7 +109,7 @@ export const InputText = ({
       </div>
       {errorMessage && (
         <div className="-mt-1 flex justify-start flex-col">
-          <span className="text-red-500 dark:text-red-400 font-medium text-sm">
+          <span className="text-red-500  font-medium text-[9px]">
             {errorMessage}
           </span>
         </div>

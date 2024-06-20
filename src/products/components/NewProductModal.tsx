@@ -1,75 +1,101 @@
-import { useContext } from "react";
-import Image from "next/image";
-
-// ---- context
-import { ProductsContext } from "@/store/context/products.context";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 
 // ---- components
 import { Button, InputText, ModalContainer } from "@/components/Index";
+import { AddImages } from "./";
 
 // ---- hooks
-import useDeleteProduct from "../hooks/useDeleteProduct";
+import useCreateProduct from "../hooks/useCreateProduct";
 
 interface Props {
   onClose: () => void;
 }
 export const NewProductModal = ({ onClose }: Props) => {
-  /*  const { state } = useContext(ProductsContext); */
-  const { deleteProduct, loading } = useDeleteProduct();
+  const { createProduct, loading } = useCreateProduct();
+
+  const {
+    handleSubmit,
+    getFieldProps,
+    errors,
+    touched,
+    isValid,
+    setFieldValue,
+  } = useFormik({
+    validateOnMount: true,
+    initialValues: {
+      title: "",
+      price: 0,
+      description: "",
+      image: "",
+      category: "",
+    },
+    onSubmit: async (values) => {
+      await createProduct({ product: values });
+      onClose();
+    },
+    validationSchema: Yup.object({
+      title: Yup.string()
+        .min(6, "Este campo debe tener al menos 6 caracteres")
+        .required("Este campo es requerido"),
+      price: Yup.number()
+        .required("Este campo es requerido")
+        .min(1, "El precio debe ser mayor que 1"),
+      description: Yup.string()
+        .min(6, "Este campo debe tener al menos 6 caracteres")
+        .required("Este campo es requerido"),
+      image: Yup.string()
+        .min(6, "Este campo debe tener al menos 6 caracteres")
+        .required("Este campo es requerido"),
+      /*    category: Yup.string().required("Este campo es requerido"), */
+    }),
+  });
 
   return (
-    <ModalContainer isOpen={true} onClose={onClose} customContainerClass="!p-12 lg:w-3/4 max-w-5xl">
+    <ModalContainer
+      isOpen={true}
+      onClose={onClose}
+      customContainerClass="!p-12 lg:w-3/4 max-w-5xl"
+    >
       <section className="flex flex-col gap-6 mt-10">
         <form className="flex flex-col gap-10">
           <div className="grid grid-cols-2 gap-6">
-          <section className="flex flex-col gap-6">
-            <InputText label="Nombre*" placeholder="" />
-            <InputText inputType="textarea" label="Descripción*" placeholder="" />
-            <InputText label="Tarifa base*" placeholder="" />
-          </section>
-          <section className="bg-customBlue-50 h-full flex flex-col p-4 rounded-2xl">
-            <p className="font-bold text-xs text-customBlue-500 mb-2">
-              Imágenes
-            </p>
-            <p className="font-light text-[10px] text-customBlue-900">
-              Añada los links de las imágenes relacionadas al producto.
-            </p>
-            <div className="flex items-center gap-1 mt-2">
-              <InputText placeholder="" />
-              <Button type="secondary" buttonType="button">
-                <p className="font-bold text-[9px] px-3">Agregar </p>
-              </Button>
-            </div>
-
-            <p className="font-light text-[10px] text-customBlue-900 text-center mt-10">
-              Selecciona la imagen principal
-            </p>
-
-            <div className="flex flex-grow">
-              <div className="flex flex-col items-center gap-2">
-                <input
-                  type="radio"
-                  id="huey"
-                  name="drone"
-                  value="huey"
-                  checked
-                />
-                <Image
-                  src={
-                    "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg"
-                  }
-                  width={48}
-                  height={48}
-                  alt={"name"}
-                />
-              </div>
-            </div>
-          </section>
+            <section className="flex flex-col gap-6">
+              <InputText
+                label="Nombre*"
+                placeholder=""
+                errorMessage={touched.title && errors.title}
+                {...getFieldProps("title")}
+              />
+              <InputText
+                inputType="textarea"
+                label="Descripción*"
+                placeholder=""
+                errorMessage={touched.description && errors.description}
+                {...getFieldProps("description")}
+              />
+              <InputText
+                prefixIcon="$"
+                label="Tarifa base*"
+                placeholder=""
+                errorMessage={touched.price && errors.price}
+                type="number"
+                {...getFieldProps("price")}
+              />
+            </section>
+            <AddImages setFieldValue={setFieldValue} />
           </div>
           <div className="w-full flex justify-end">
-            <Button customClassButton="h-10 px-12"><p className="text-xs font-bold">Guardar</p></Button>
+            <Button
+              customClassButton="h-10 px-12"
+              onClick={handleSubmit}
+              buttonType="button"
+              isDisabled={!isValid}
+              isLoading={loading}
+            >
+              <p className="text-xs font-bold">Guardar</p>
+            </Button>
           </div>
-
         </form>
       </section>
     </ModalContainer>
