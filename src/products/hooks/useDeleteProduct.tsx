@@ -13,7 +13,7 @@ interface DeleteProduct {
   idProduct: number;
 }
 
-const useDeleteProduct = () => {
+export const useDeleteProduct = () => {
   const { state, dispatch } = useContext(ProductsContext);
 
   const [loading, setLoading] = useState(false);
@@ -50,5 +50,3 @@ const useDeleteProduct = () => {
 
   return { deleteProduct, loading };
 };
-
-export default useDeleteProduct;

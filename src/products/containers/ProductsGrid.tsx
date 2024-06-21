@@ -8,8 +8,7 @@ import Image from "next/image";
 import { ProductsContext } from "@/store/context/products.context";
 
 // ---- components
-import { IconSearch } from "@tabler/icons-react";
-import { Button, InputText } from "@/components";
+import { Button } from "@/components";
 import { TableProducts } from "../components";
 
 import { NewProductModal } from "./NewProductModal";
@@ -70,11 +69,6 @@ export const ProductsGrid = ({ products }: Props) => {
         <Image src={logoLizit} width={50} height={12} alt="logo" />
       </div>
 
-      <InputText
-        maxWidth="lg:w-1/3"
-        placeholder="buscar"
-        suffix={<IconSearch size={16} className="text-customBlue-500" />}
-      ></InputText>
       <TableProducts />
       {addProduct && <NewProductModal onClose={() => setProduct(false)} />}
     </section>

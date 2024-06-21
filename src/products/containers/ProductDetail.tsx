@@ -14,8 +14,7 @@ import { FormProduct, NotFoundProduct } from "../components";
 import { ProductEntity } from "../interfaces/product";
 
 // ---- hooks
-import useGetProduct from "../hooks/useGetProduct";
-import useUpdateProduct from "../hooks/useUpdateProduct";
+import { useGetProduct, useUpdateProduct } from "../hooks";
 
 // ---- assets
 import logoLizit from "@/assets/logos/logoLizit.svg";
@@ -69,7 +68,7 @@ export const ProductsDetail = ({ id, isSearchParamsEdit }: Props) => {
         initialData={product}
         isDetail={true}
         isSearchParamsEdit={isSearchParamsEdit}
-        customClass={'flex-1 justify-between'}
+        customClass={"flex-1 justify-between"}
       />
     </section>
   );

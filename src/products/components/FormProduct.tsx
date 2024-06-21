@@ -11,7 +11,7 @@ import { AddImages, DeleteModal } from "./";
 
 // ---- hooks
 import { useFormik } from "formik";
-import useGetCategories from "../hooks/useGetCategories";
+import { useGetCategories } from "../hooks";
 
 // ---- interfaces
 import { ProductEntity } from "@/products";

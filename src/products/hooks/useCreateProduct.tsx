@@ -13,7 +13,7 @@ interface CreateProduct {
   product: Omit<ProductEntity, "id" | "rating">;
 }
 
-const useCreateProduct = () => {
+export const useCreateProduct = () => {
   const { state, dispatch } = useContext(ProductsContext);
 
   const [loading, setLoading] = useState(false);
@@ -56,4 +56,3 @@ const useCreateProduct = () => {
   return { createProduct, loading };
 };
 
-export default useCreateProduct;

@@ -3,7 +3,7 @@ import { ModalContainer } from "@/components";
 import { FormProduct } from "../components";
 
 // ---- hooks
-import useCreateProduct from "../hooks/useCreateProduct";
+import { useCreateProduct } from "../hooks/useCreateProduct";
 
 // ---- interfaces
 import { ProductEntity } from "@/products";

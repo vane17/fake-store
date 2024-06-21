@@ -14,7 +14,7 @@ interface CreateProduct {
   id: number;
 }
 
-const useUpdateProduct = () => {
+export const useUpdateProduct = () => {
   const { state, dispatch } = useContext(ProductsContext);
 
   const [loading, setLoading] = useState(false);
@@ -47,5 +47,3 @@ const useUpdateProduct = () => {
 
   return { updateProduct, loading };
 };
-
-export default useUpdateProduct;

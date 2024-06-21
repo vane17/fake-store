@@ -1,5 +1,5 @@
 "use client";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 
 import Image from "next/image";
 
@@ -10,7 +10,8 @@ import { useRouter } from "next/navigation";
 import { ProductsContext } from "@/store/context/products.context";
 
 // ---- components
-import { Button, Table } from "@/components";
+import { IconSearch } from "@tabler/icons-react";
+import { Button, Table, InputText } from "@/components";
 import { DeleteModal, LoadingTableProduct } from "./";
 
 // ---- interfaces
@@ -56,11 +57,44 @@ export const TableProducts = () => {
 
   const [infoDeleteProduct, setInfoDeleteProduct] =
     useState<InfoDeleteProduct>();
+  const [filterProducts, setFilterProducts] = useState<ProductEntity[]>([]);
+  const [searchWord, setSearchWord] = useState<string>();
+
+  useEffect(() => {
+    if (searchWord?.length) {
+      searchProducts(searchWord);
+    }
+  }, [searchWord]);
+
+  const searchProducts = (searchTerm: string) => {
+    const lowerCasedSearchTerm = searchTerm.toLowerCase();
+    const newList =
+      state.products?.filter(
+        (product) =>
+          product.title.toLowerCase().includes(lowerCasedSearchTerm) ||
+          product.category.toLowerCase().includes(lowerCasedSearchTerm)
+      ) || [];
+
+    setFilterProducts(newList);
+  };
 
   return (
     <>
+      <InputText
+        maxWidth="lg:w-1/3"
+        placeholder="buscar por nombre o categoría"
+        suffix={<IconSearch size={16} className="text-customBlue-500" />}
+        onChange={(e) => setSearchWord((e.target as HTMLInputElement).value)}
+      ></InputText>
+
       <Table
-        data={state.loading ? DATA_LOADING : state.products}
+        data={
+          state.loading
+            ? DATA_LOADING
+            : searchWord?.length
+            ? filterProducts
+            : state.products
+        }
         columns={COLUMNS}
         columnsWidth={COLUMNS_WIDTH}
       >

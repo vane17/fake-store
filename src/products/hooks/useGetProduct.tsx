@@ -12,7 +12,7 @@ interface GetProduct {
 
 const localStorageService = new LocalStorageService();
 
-const useGetProduct = () => {
+export const useGetProduct = () => {
   const [loading, setLoading] = useState(true);
   const [product, setProduct] = useState<ProductEntity>();
 
@@ -48,4 +48,3 @@ const useGetProduct = () => {
   return { getProduct, loading, product };
 };
 
-export default useGetProduct;

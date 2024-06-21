@@ -5,7 +5,7 @@ interface Options {
   value: string;
 }
 
-const useGetCategories = () => {
+export const useGetCategories = () => {
   const [loading, setLoading] = useState(false);
   const [categories, setCategories] = useState<Options[]>();
 
@@ -28,5 +28,3 @@ const useGetCategories = () => {
 
   return { getCategories, loading, categories };
 };
-
-export default useGetCategories;

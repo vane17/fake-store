@@ -2,7 +2,7 @@
 import { Button, ModalContainer } from "@/components";
 
 // ---- hooks
-import useDeleteProduct from "../hooks/useDeleteProduct";
+import { useDeleteProduct } from "../hooks";
 
 interface Props {
   idProduct: number;
@@ -28,7 +28,7 @@ export const DeleteModal = ({ onClose, idProduct, onCloseSend }: Props) => {
             isLoading={loading}
             onClick={async () => {
               await deleteProduct({ idProduct });
-              onCloseSend()
+              onCloseSend();
             }}
           >
             <p className="font-bold text-xs">Confirmar</p>
