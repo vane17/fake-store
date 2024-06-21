@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { ProductsContext } from "@/store/context/products.context";
 
 // ---- components
-import { Button, ModalContainer } from "@/components/Index";
+import { Button, ModalContainer } from "@/components";
 
 // ---- hooks
 import useDeleteProduct from "../hooks/useDeleteProduct";
@@ -34,7 +34,7 @@ export const DeleteModal = ({ onClose, idProduct }: Props) => {
             onClick={async () => {
               await deleteProduct({ idProduct });
 
-              onClose()
+              onClose();
             }}
           >
             <p className="font-bold text-xs">Confirmar</p>

@@ -1,5 +1,5 @@
 // ---- containers
-import { ProductsGrid } from "@/products/containers/ProductsGrid";
+import { ProductsGrid } from "@/products";
 
 // ---- interfaces
 import { ProductEntity } from "@/products";

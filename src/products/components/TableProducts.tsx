@@ -3,11 +3,14 @@ import { useContext, useState } from "react";
 
 import Image from "next/image";
 
+// ---- hooks
+import { useRouter } from "next/navigation";
+
 // ---- context
 import { ProductsContext } from "@/store/context/products.context";
 
 // ---- components
-import { Button, Table } from "@/components/Index";
+import { Button, Table } from "@/components";
 import { DeleteModal } from "./DeleteModal";
 
 // ---- assets
@@ -39,7 +42,8 @@ interface InfoDeleteProduct {
 
 export const TableProducts = () => {
   const { state } = useContext(ProductsContext);
-  
+  const router = useRouter();
+
   const [infoDeleteProduct, setInfoDeleteProduct] =
     useState<InfoDeleteProduct>();
 
@@ -81,15 +85,21 @@ export const TableProducts = () => {
           if (column.accessor === "actions") {
             return (
               <section className="flex items-center gap-2 ">
-                <Button type="secondary" customClassButton="px-5 py-0">
+                <Button
+                  type="secondary"
+                  customClassButton="px-5 py-0"
+                  onClick={() => router.push(`/products/${item.id}`)}
+                >
                   <p className="font-bold text-white text-[8px]">Ver</p>
                 </Button>
+
                 <Image
                   src={iconEdit}
                   width={26}
                   height={26}
                   alt="edit product"
                   className="cursor-pointer"
+                  onClick={() => router.push(`/products/${item.id}?edit=true`)}
                 />
 
                 <Image

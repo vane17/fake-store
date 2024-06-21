@@ -29,7 +29,7 @@ const STYLES_MODAL: Styles = {
     display: "flex",
     justifyContent: "center",
     position: "absolute",
-    overflow: "none"
+    overflow: "none",
   },
   overlay: {
     zIndex: 10000000,
@@ -51,7 +51,14 @@ export const ModalContainer = ({
         className={`flex flex-col w-max  rounded-3xl bg-white m-auto max-h-[90vh] h-auto shadow-md p-4  ${customContainerClass}`}
       >
         <div className="flex w-full justify-end">
-          <Image src={iconClose} width={32} height={32} alt="icon close"  className="cursor-pointer" onClick={onClose}/>
+          <Image
+            src={iconClose}
+            width={32}
+            height={32}
+            alt="icon close"
+            className="cursor-pointer"
+            onClick={onClose}
+          />
         </div>
 
         <main className={`overflow-y-auto h-full ${customMainClass}`}>

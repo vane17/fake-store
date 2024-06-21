@@ -1,19 +1,6 @@
-import { useEffect, useRef, useState } from "react";
-import Select, {
-  GroupBase,
-  InputActionMeta,
-  Props as SelectProps,
-  components,
-} from "react-select";
-import AsyncSelect from "react-select/async";
+import Select, { GroupBase, Props as SelectProps } from "react-select";
 
 type P<G> = G & { description?: string };
-
-interface StateSelectorComp<T> {
-  loading?: boolean;
-  data?: T[];
-  selected?: P<T>;
-}
 
 interface Props<T> extends SelectProps<T, boolean, GroupBase<T>> {
   defaultValue?: any;
@@ -47,6 +34,7 @@ export const InputSelect = <T extends object>({
 
       <Select
         {...props}
+        isDisabled={isDisabled}
         isLoading={isLoading}
         placeholder={""}
         noOptionsMessage={() => "No hay opciones"}
@@ -56,7 +44,9 @@ export const InputSelect = <T extends object>({
         }}
         classNames={{
           control: () =>
-            `!h-7 !bg-white  !text-[#494949]  !rounded-xl !shadow-none !border !border-customBlue-500`,
+            `!h-5 !bg-transparent  !text-[#494949]  !rounded-xl !shadow-none !border  ${
+              isDisabled ? "!border-customBlue-100" : "!border-customBlue-500"
+            }`,
           option: ({ isSelected }) =>
             `${
               isSelected
@@ -64,6 +54,7 @@ export const InputSelect = <T extends object>({
                 : "!bg-white !text-[#494949]"
             } font-medium !text-xs`,
           singleValue: () => "!text-[#494949] !text-xs",
+          input: () => "!p-0 !m-0",
         }}
       />
 

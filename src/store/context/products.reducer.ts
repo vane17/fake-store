@@ -1,7 +1,12 @@
 import { ProductsState } from "./products.provider";
 
+// ---- services 
+import {LocalStorageService} from '@/services/localStorage.service'
+
 // ---- interfaces
 import { ProductEntity } from "@/products";
+
+const localStorageService = new LocalStorageService();
 
 export type ProductsAction = {
   type: "setProducts";
@@ -16,6 +21,12 @@ export const ProductsReducer = (
 ): ProductsState => {
   switch (action.type) {
     case "setProducts":
+
+      localStorageService.setItem({
+        key: 'products',
+        value: JSON.stringify(action.payload.products),
+      });
+
       return {
         ...state,
         products: action.payload.products,

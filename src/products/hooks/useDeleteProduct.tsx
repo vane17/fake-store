@@ -5,6 +5,8 @@ import { ProductsContext } from "@/store/context/products.context";
 
 // ---- components
 import { Toast } from "@/components/Toast";
+
+// ---- interfaces
 import { ProductEntity } from "../interfaces/product";
 
 interface DeleteProduct {

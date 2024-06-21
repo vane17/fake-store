@@ -2,6 +2,7 @@
 import React from "react";
 import classNames from "classnames";
 
+// ---- components
 import { IconLoader } from "@tabler/icons-react";
 
 interface Props {
@@ -34,8 +35,8 @@ export const Button = ({
     "bg-customRed-900  border-customRed-900  focus:ring-customRed-600":
       type === "danger",
     "border-customViolet-900 focus:ring-0": type === "back",
-    "cursor-not-allowed": isLoading || isDisabled && type !== "primary",
-    "cursor-not-allowed bg-customBlue-300":  isDisabled && type === "primary",
+    "cursor-not-allowed": isLoading || (isDisabled && type !== "primary"),
+    "cursor-not-allowed bg-customBlue-300": isDisabled && type === "primary",
   });
 
   return (

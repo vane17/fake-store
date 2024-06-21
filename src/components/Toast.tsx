@@ -1,7 +1,6 @@
 import { toast } from "react-toastify";
 import classNames from "classnames";
 import "react-toastify/dist/ReactToastify.css";
-import { IconCheck, IconX } from "@tabler/icons-react";
 
 export type TypeOptions = "success" | "error";
 

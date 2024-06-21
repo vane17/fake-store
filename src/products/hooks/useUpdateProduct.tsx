@@ -11,44 +11,41 @@ import { ProductEntity } from "../interfaces/product";
 
 interface CreateProduct {
   product: Omit<ProductEntity, "id" | "rating">;
+  id: number;
 }
 
-const useCreateProduct = () => {
+const useUpdateProduct = () => {
   const { state, dispatch } = useContext(ProductsContext);
 
   const [loading, setLoading] = useState(false);
 
-  const createProduct = async ({ product }: CreateProduct) => {
+  const updateProduct = async ({ product, id }: CreateProduct) => {
     try {
       setLoading(true);
 
-      const response = await fetch(`https://fakestoreapi.com/products`, {
-        method: "POST",
+      const response = await fetch(`https://fakestoreapi.com/products/${id}`, {
+        method: "PATCH",
         body: JSON.stringify(product),
       });
       (await response.json()) as { id: number };
 
       const newProducts = state?.products || [];
-      newProducts.unshift({ ...product, id: state.products?.length || 0 + 1 });
 
       dispatch({
         type: "setProducts",
         payload: {
-          products: newProducts,
+          products: [...newProducts, product as ProductEntity],
         },
       });
 
       setLoading(false);
-      Toast(`Producto: ${product.title}, se creo con exito`);
+      Toast(`Producto: ${product.title}, actualizado con exito`);
     } catch (error) {
       setLoading(false);
-      Toast(`Error al crear producto, intentalo de nuevo`, {
-        type: "error",
-      });
     }
   };
 
-  return { createProduct, loading };
+  return { updateProduct, loading };
 };
 
-export default useCreateProduct;
+export default useUpdateProduct;

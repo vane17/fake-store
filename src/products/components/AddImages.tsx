@@ -4,7 +4,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 
 // ---- components
-import { Button, InputText } from "@/components/Index";
+import { Button, InputText } from "@/components";
 
 interface Props {
   setFieldValue: (fieldName: string, value: string) => void;

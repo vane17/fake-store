@@ -1,5 +1,6 @@
 import { ChangeEventHandler, FocusEventHandler, ReactNode } from "react";
 
+// ----componets
 import { IconLoader } from "@tabler/icons-react";
 
 export interface Props {
@@ -60,7 +61,9 @@ export const InputText = ({
             onBlur={onBlur}
             disabled={isDisabled}
             placeholder={placeholder}
-            className={`outline-none w-full min-h-20 rounded-xl text-[#494949]  border border-customBlue-500 text-xs px-5`}
+            className={`outline-none py-2 w-full min-h-20 bg-transparent  rounded-xl text-[#494949]  border  text-xs px-5 ${
+              isDisabled ? "border-customBlue-100" : "border-customBlue-500"
+            }`}
           />
         ) : (
           <input
@@ -71,7 +74,7 @@ export const InputText = ({
             disabled={isDisabled}
             placeholder={placeholder}
             type={type}
-            className={`outline-none w-full  h-8 rounded-xl text-[#494949] border border-customBlue-500 text-xs px-5 ${
+            className={`outline-none w-full bg-transparent  h-[38px] rounded-xl text-[#494949] border b text-xs px-5 ${
               prefixIcon ? "pl-10" : ""
             } ${
               isDisabled ? "border-customBlue-100" : "border-customBlue-500"
