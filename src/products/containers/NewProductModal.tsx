@@ -1,6 +1,6 @@
 // ---- components
 import { ModalContainer } from "@/components";
-import { FormProduct } from "./";
+import { FormProduct } from "../components";
 
 // ---- hooks
 import useCreateProduct from "../hooks/useCreateProduct";

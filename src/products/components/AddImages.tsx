@@ -57,7 +57,7 @@ export const AddImages = ({ setFieldValue }: Props) => {
         Selecciona la imagen principal
       </p>
 
-      <div className="flex flex-wrap">
+      <div className="flex flex-wrap gap-2 justify-center">
         {images.map((url, idx) => (
           <div className="flex flex-col items-center gap-2" key={idx}>
             <input

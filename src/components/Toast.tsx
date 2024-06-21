@@ -39,9 +39,9 @@ export const Toast = (
         const classProgress = [];
 
         if (type === "success")
-          classProgress.push("!bg-green-500 dark:!bg-green-400");
+          classProgress.push("!bg-green-500");
         if (type === "error")
-          classProgress.push("!bg-red-500 dark:!bg-red-400");
+          classProgress.push("!bg-red-500");
 
         return `${data?.defaultClassName} ${classProgress.join("")}`;
       },

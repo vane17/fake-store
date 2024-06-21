@@ -11,7 +11,10 @@ import { ProductsContext } from "@/store/context/products.context";
 
 // ---- components
 import { Button, Table } from "@/components";
-import { DeleteModal } from "./DeleteModal";
+import { DeleteModal, LoadingTableProduct } from "./";
+
+// ---- interfaces
+import { ProductEntity } from "@/products";
 
 // ---- assets
 import iconEdit from "@/assets/icons/edit.svg";
@@ -35,6 +38,13 @@ const COLUMNS_WIDTH = [
   "w-40",
 ];
 
+const DATA_LOADING: ProductEntity[] = Array(10)
+  .fill(undefined)
+  .map((item, index) => ({
+    ...item,
+    id: index.toString(),
+  }));
+
 interface InfoDeleteProduct {
   isOpen: boolean;
   idProduct?: number;
@@ -50,11 +60,16 @@ export const TableProducts = () => {
   return (
     <>
       <Table
-        data={state.products}
+        data={state.loading ? DATA_LOADING : state.products}
         columns={COLUMNS}
         columnsWidth={COLUMNS_WIDTH}
       >
         {(item, column) => {
+          if (state.loading) {
+            return (
+              <LoadingTableProduct column={column} isLoading={state.loading} />
+            );
+          }
           if (column.accessor === "image") {
             return (
               <Image

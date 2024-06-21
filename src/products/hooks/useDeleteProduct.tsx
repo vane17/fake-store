@@ -22,13 +22,13 @@ const useDeleteProduct = () => {
     try {
       setLoading(true);
 
-      const response = await fetch(
+      await fetch(
         `https://fakestoreapi.com/products/${idProduct}`,
         {
           method: "DELETE",
         }
       );
-      const res = (await response.json()) as ProductEntity;
+      const productDelete = state.products?.find((product)=> product.id === idProduct)
 
       dispatch({
         type: "setProducts",
@@ -39,7 +39,7 @@ const useDeleteProduct = () => {
       });
 
       setLoading(false);
-      Toast(`Producto: ${res.title}, eliminado con exito`);
+      Toast(`Producto: ${productDelete?.title}, eliminado con exito`);
     } catch (error) {
       setLoading(false);
       Toast(`Error al eliminar producto, intentalo de nuevo`, {

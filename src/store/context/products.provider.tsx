@@ -7,10 +7,12 @@ import { ProductEntity } from "@/products";
 
 export interface ProductsState {
   products?: ProductEntity[];
+  loading?: boolean;
 }
 
 const INITIAL_STATE: ProductsState = {
   products: [],
+  loading: true,
 };
 
 interface Prop {

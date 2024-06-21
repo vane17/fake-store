@@ -29,7 +29,12 @@ const useCreateProduct = () => {
       (await response.json()) as { id: number };
 
       const newProducts = state?.products || [];
-      newProducts.unshift({ ...product, id: state.products?.length || 0 + 1 });
+
+      const highestId = newProducts.reduce((maxId, product) => {
+        return product.id > maxId ? product.id : maxId;
+      }, 0);
+
+      newProducts.push({ ...product, id: highestId + 1 });
 
       dispatch({
         type: "setProducts",

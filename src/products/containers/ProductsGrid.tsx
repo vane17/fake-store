@@ -10,7 +10,9 @@ import { ProductsContext } from "@/store/context/products.context";
 // ---- components
 import { IconSearch } from "@tabler/icons-react";
 import { Button, InputText } from "@/components";
-import { TableProducts, NewProductModal } from "../components";
+import { TableProducts } from "../components";
+
+import { NewProductModal } from "./NewProductModal";
 
 // ---- interfaces
 import { ProductEntity } from "../interfaces/product";

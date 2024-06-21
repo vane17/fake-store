@@ -84,9 +84,7 @@ export const InputText = ({
 
         {prefixIcon && (
           <div
-            className={`absolute inset-y-0 flex items-center text-zinc-500 select-none left-3  ${
-              isSearch ? "dark:text-white" : "dark:text-zinc-300"
-            }`}
+            className={`absolute inset-y-0 flex items-center text-zinc-500 select-none left-3`}
           >
             {prefixIcon}
           </div>

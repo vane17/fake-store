@@ -34,7 +34,7 @@ const useUpdateProduct = () => {
       dispatch({
         type: "setProducts",
         payload: {
-          products: [...newProducts, product as ProductEntity],
+          products:newProducts.map((prod)=> (prod.id === id ? product as ProductEntity : prod)),
         },
       });
 

@@ -30,6 +30,7 @@ export const ProductsReducer = (
       return {
         ...state,
         products: action.payload.products,
+        loading: false,
       };
     default:
       return state;
