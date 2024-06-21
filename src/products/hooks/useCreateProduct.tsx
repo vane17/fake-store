@@ -24,10 +24,10 @@ const useCreateProduct = () => {
         method: "POST",
         body: JSON.stringify(product),
       });
-      const res = (await response.json()) as { id: number };
+      (await response.json()) as { id: number };
 
       const newProducts = state?.products || [];
-      newProducts.unshift({ ...product, id: res?.id });
+      newProducts.unshift({ ...product, id: state.products?.length || 0 + 1 });
 
       dispatch({
         type: "setProducts",

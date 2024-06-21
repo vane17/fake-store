@@ -28,13 +28,14 @@ export const Button = ({
 
   const computedClasses = classNames({
     "bg-customViolet-900 border-customViolet-900 focus:ring-customViolet-300":
-      type === "primary",
+      type === "primary" && !isDisabled,
     "bg-customBlue-500 border-customBlue-500 focus:ring-customBlue-300":
       type === "secondary",
     "bg-customRed-900  border-customRed-900  focus:ring-customRed-600":
       type === "danger",
     "border-customViolet-900 focus:ring-0": type === "back",
-    "cursor-not-allowed": isLoading || isDisabled,
+    "cursor-not-allowed": isLoading || isDisabled && type !== "primary",
+    "cursor-not-allowed bg-customBlue-300":  isDisabled && type === "primary",
   });
 
   return (

@@ -31,7 +31,7 @@ export const AddImages = ({ setFieldValue }: Props) => {
   });
 
   return (
-    <section className="bg-customBlue-50 h-full flex flex-col p-4 rounded-2xl">
+    <section className="bg-customBlue-50 h-full flex flex-col p-4 rounded-2xl justify-center">
       <p className="font-bold text-xs text-customBlue-500 mb-2">Imágenes</p>
       <p className="font-light text-[10px] text-customBlue-900">
         Añada los links de las imágenes relacionadas al producto.

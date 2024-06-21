@@ -1,18 +1,30 @@
+import { useEffect } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
 // ---- components
-import { Button, InputText, ModalContainer } from "@/components/Index";
+import {
+  Button,
+  InputText,
+  ModalContainer,
+  InputSelect,
+} from "@/components/Index";
 import { AddImages } from "./";
 
 // ---- hooks
 import useCreateProduct from "../hooks/useCreateProduct";
+import useGetCategories from "../hooks/useGetCategories";
 
 interface Props {
   onClose: () => void;
 }
 export const NewProductModal = ({ onClose }: Props) => {
   const { createProduct, loading } = useCreateProduct();
+  const { getCategories, categories, loading: loadingCategories } = useGetCategories();
+
+  useEffect(() => {
+    getCategories();
+  }, []);
 
   const {
     handleSubmit,
@@ -21,6 +33,8 @@ export const NewProductModal = ({ onClose }: Props) => {
     touched,
     isValid,
     setFieldValue,
+    setFieldTouched,
+    getFieldMeta,
   } = useFormik({
     validateOnMount: true,
     initialValues: {
@@ -47,7 +61,7 @@ export const NewProductModal = ({ onClose }: Props) => {
       image: Yup.string()
         .min(6, "Este campo debe tener al menos 6 caracteres")
         .required("Este campo es requerido"),
-      /*    category: Yup.string().required("Este campo es requerido"), */
+      category: Yup.string().required("Este campo es requerido"),
     }),
   });
 
@@ -66,6 +80,21 @@ export const NewProductModal = ({ onClose }: Props) => {
                 placeholder=""
                 errorMessage={touched.title && errors.title}
                 {...getFieldProps("title")}
+              />
+              <InputSelect
+                options={categories}
+                label="Categoría"
+                value={{
+                  value: getFieldMeta("category").value,
+                  label: getFieldMeta("category").value,
+                }}
+                onItemSelected={(category) =>
+                  setFieldValue("category", category.value)
+                }
+                errorMessage={touched.category && errors.category}
+                setFieldTouched={setFieldTouched}
+                name="category"
+                isLoading={loadingCategories}
               />
               <InputText
                 inputType="textarea"
