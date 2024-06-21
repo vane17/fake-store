@@ -40,15 +40,17 @@ export const ProductsDetail = ({ id, isSearchParamsEdit }: Props) => {
   ) : !loading && !product ? (
     <NotFoundProduct />
   ) : (
-    <section className="w-full">
-      <div className="flex items-center justify-between">
+    <section className="w-full flex flex-col">
+      <div className="flex items-center justify-between gap-6">
         <div className="flex items-center gap-3">
-          <Link
-            href="/products"
-            className="bg-customBlue-50 flex justify-center items-center rounded-[5px] h-5 w-5"
-          >
-            <Image src={iconArrow} width={50} height={12} alt="logo" />
-          </Link>
+          <div className="min-h-5 min-w-5">
+            <Link
+              href="/products"
+              className="bg-customBlue-50 flex justify-center items-center rounded-[5px] h-5 w-5"
+            >
+              <Image src={iconArrow} width={50} height={12} alt="logo" />
+            </Link>
+          </div>
           <h3 className="font-bold text-customBlue-900 text-2xl">
             {product?.title}
           </h3>
@@ -67,6 +69,7 @@ export const ProductsDetail = ({ id, isSearchParamsEdit }: Props) => {
         initialData={product}
         isDetail={true}
         isSearchParamsEdit={isSearchParamsEdit}
+        customClass={'flex-1 justify-between'}
       />
     </section>
   );

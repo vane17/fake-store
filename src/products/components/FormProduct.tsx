@@ -23,6 +23,7 @@ interface Props {
   initialData?: ProductEntity;
   isDetail?: boolean;
   isSearchParamsEdit?: string;
+  customClass?: string;
 }
 
 interface InfoDeleteProduct {
@@ -36,6 +37,7 @@ export const FormProduct = ({
   initialData,
   isDetail,
   isSearchParamsEdit,
+  customClass,
 }: Props) => {
   const {
     getCategories,
@@ -58,6 +60,10 @@ export const FormProduct = ({
       setValues(initialData);
 
       setIsEditable(isSearchParamsEdit === "true");
+
+      setTimeout(() => {
+        setFieldTouched("title");
+      }, 100);
     }
   }, [initialData, isSearchParamsEdit]);
 
@@ -101,8 +107,8 @@ export const FormProduct = ({
   });
 
   return (
-    <form className="flex flex-col gap-10 mt-10">
-      <div className="grid grid-cols-2 gap-6">
+    <form className={`flex flex-col gap-10 mt-10 ${customClass}`}>
+      <div className="grid md:grid-cols-2 gap-6">
         <section className="flex flex-col gap-6">
           <InputText
             label="Nombre*"
@@ -146,24 +152,28 @@ export const FormProduct = ({
           />
         </section>
         {isDetail ? (
-          <div className="w-full flex items-center justify-center">
-            <Image
+          <div className="w-full flex items-center justify-center ">
+            {getFieldMeta("image").value && (
+              <Image
               src={getFieldMeta("image").value}
-              width={50}
-              height={500}
               alt="logo"
-              className="!h-full w-auto"
-            />
+              layout="responsive"
+              width={500} 
+              height={500} 
+              quality={100}
+              className="!w-2/3 !max-w-96"
+              />
+            )}
           </div>
         ) : (
           <AddImages setFieldValue={setFieldValue} />
         )}
       </div>
-      <div className="w-full flex justify-end">
+      <div className="w-full flex  flex-col gap-2 items-center justify-center sm:flex-row md:justify-end">
         {isDetail && (
           <Button
             type="back"
-            customClassButton="h-10 px-16"
+            customClassButton="h-10 px-16 max-w-44"
             buttonType="button"
           >
             <Link
@@ -179,7 +189,7 @@ export const FormProduct = ({
           <>
             <Button
               type="danger"
-              customClassButton="h-10 px-16"
+              customClassButton="h-10 px-16 max-w-44"
               onClick={() => {
                 if (initialData)
                   setInfoDeleteProduct({
@@ -193,7 +203,7 @@ export const FormProduct = ({
             </Button>
 
             <Button
-              customClassButton="h-10 px-16"
+              customClassButton="h-10 px-16 max-w-44"
               buttonType="button"
               onClick={() => setIsEditable(true)}
             >
@@ -202,7 +212,7 @@ export const FormProduct = ({
           </>
         ) : (
           <Button
-            customClassButton={`h-10 ${isDetail ? "px-16" : "px-12"}`}
+            customClassButton={`h-10 ${isDetail ? "px-16" : "px-12"} max-w-44`}
             onClick={handleSubmit}
             buttonType="button"
             isDisabled={!isValid}
