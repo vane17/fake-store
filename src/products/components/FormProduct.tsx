@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 
 import Image from "next/image";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 import * as Yup from "yup";
@@ -155,13 +154,13 @@ export const FormProduct = ({
           <div className="w-full flex items-center justify-center ">
             {getFieldMeta("image").value && (
               <Image
-              src={getFieldMeta("image").value}
-              alt="logo"
-              layout="responsive"
-              width={500} 
-              height={500} 
-              quality={100}
-              className="!w-2/3 !max-w-96"
+                src={getFieldMeta("image").value}
+                alt="logo"
+                layout="responsive"
+                width={500}
+                height={500}
+                quality={100}
+                className="!w-2/3 !max-w-96"
               />
             )}
           </div>
@@ -175,13 +174,17 @@ export const FormProduct = ({
             type="back"
             customClassButton="h-10 px-16 max-w-44"
             buttonType="button"
+            onClick={() => {
+              if (isEditable) {
+                setIsEditable(false);
+              } else {
+                router.push("/products");
+              }
+            }}
           >
-            <Link
-              href="/products"
-              className="text-xs font-bold text-customViolet-900 "
-            >
+            <p className="text-xs font-bold text-customViolet-900">
               {isEditable ? "Cancelar" : "Volver"}
-            </Link>
+            </p>
           </Button>
         )}
 
@@ -227,6 +230,9 @@ export const FormProduct = ({
         <DeleteModal
           idProduct={infoDeleteProduct?.idProduct}
           onClose={() => {
+            setInfoDeleteProduct({ isOpen: false });
+          }}
+          onCloseSend={() => {
             setInfoDeleteProduct({ isOpen: false });
             router.push("/products");
           }}

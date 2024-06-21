@@ -138,6 +138,7 @@ export const TableProducts = () => {
         <DeleteModal
           idProduct={infoDeleteProduct?.idProduct}
           onClose={() => setInfoDeleteProduct({ isOpen: false })}
+          onCloseSend={() => setInfoDeleteProduct({ isOpen: false })}
         />
       )}
     </>

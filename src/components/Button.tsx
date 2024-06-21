@@ -25,16 +25,16 @@ export const Button = ({
   type = "primary",
 }: Props) => {
   const baseClasses =
-    "flex max-w-3xl border justify-center relative gap-2 focus:outline-none text-white focus:ring-1 font-medium rounded-[35px] text-base  items-center";
+    "flex max-w-3xl border-0 justify-center relative gap-2 focus:outline-none text-white  font-medium rounded-[35px] text-base  items-center";
 
   const computedClasses = classNames({
-    "bg-customViolet-900 border-customViolet-900 focus:ring-customViolet-300":
+    "bg-customViolet-900  hover:bg-[#4f4bbb]":
       type === "primary" && !isDisabled,
-    "bg-customBlue-500 border-customBlue-500 focus:ring-customBlue-300":
+    "bg-customBlue-500  hover:bg-[#316cc0] ":
       type === "secondary",
-    "bg-customRed-900  border-customRed-900  focus:ring-customRed-600":
+    "bg-customRed-900  hover:bg-customBlue-500":
       type === "danger",
-    "border-customViolet-900 focus:ring-0": type === "back",
+    "!border border-customViolet-900 focus:ring-0 hover:bg-customBlue-50": type === "back",
     "cursor-not-allowed": isLoading || (isDisabled && type !== "primary"),
     "cursor-not-allowed bg-customBlue-300": isDisabled && type === "primary",
   });

@@ -1,8 +1,3 @@
-import { useContext } from "react";
-
-// ---- context
-import { ProductsContext } from "@/store/context/products.context";
-
 // ---- components
 import { Button, ModalContainer } from "@/components";
 
@@ -12,9 +7,9 @@ import useDeleteProduct from "../hooks/useDeleteProduct";
 interface Props {
   idProduct: number;
   onClose: () => void;
+  onCloseSend: () => void;
 }
-export const DeleteModal = ({ onClose, idProduct }: Props) => {
-  const { state } = useContext(ProductsContext);
+export const DeleteModal = ({ onClose, idProduct, onCloseSend }: Props) => {
   const { deleteProduct, loading } = useDeleteProduct();
 
   return (
@@ -33,8 +28,7 @@ export const DeleteModal = ({ onClose, idProduct }: Props) => {
             isLoading={loading}
             onClick={async () => {
               await deleteProduct({ idProduct });
-
-              onClose();
+              onCloseSend()
             }}
           >
             <p className="font-bold text-xs">Confirmar</p>
